@@ -1,0 +1,409 @@
+<!doctype html>
+<html>
+<!-- START SIGMA IMPORTS -->
+<script src="sigma/src/sigma.core.js"></script>
+<script src="sigma/src/conrad.js"></script>
+<script src="sigma/src/utils/sigma.utils.js"></script>
+<script src="sigma/src/utils/sigma.polyfills.js"></script>
+<script src="sigma/src/sigma.settings.js"></script>
+<script src="sigma/src/classes/sigma.classes.dispatcher.js"></script>
+<script src="sigma/src/classes/sigma.classes.configurable.js"></script>
+<script src="sigma/src/classes/sigma.classes.graph.js"></script>
+<script src="sigma/src/classes/sigma.classes.camera.js"></script>
+<script src="sigma/src/classes/sigma.classes.quad.js"></script>
+<script src="sigma/src/classes/sigma.classes.edgequad.js"></script>
+<script src="sigma/src/captors/sigma.captors.mouse.js"></script>
+<script src="sigma/src/captors/sigma.captors.touch.js"></script>
+<script src="sigma/src/renderers/sigma.renderers.canvas.js"></script>
+<script src="sigma/src/renderers/sigma.renderers.webgl.js"></script>
+<script src="sigma/src/renderers/sigma.renderers.svg.js"></script>
+<script src="sigma/src/renderers/sigma.renderers.def.js"></script>
+<script src="sigma/src/renderers/webgl/sigma.webgl.nodes.def.js"></script>
+<script src="sigma/src/renderers/webgl/sigma.webgl.nodes.fast.js"></script>
+<script src="sigma/src/renderers/webgl/sigma.webgl.edges.def.js"></script>
+<script src="sigma/src/renderers/webgl/sigma.webgl.edges.fast.js"></script>
+<script src="sigma/src/renderers/webgl/sigma.webgl.edges.arrow.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+<script src="sigma/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.utils.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.nodes.def.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.edges.def.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.edges.curve.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.labels.def.js"></script>
+<script src="sigma/src/renderers/svg/sigma.svg.hovers.def.js"></script>
+<script src="sigma/src/middlewares/sigma.middlewares.rescale.js"></script>
+<script src="sigma/src/middlewares/sigma.middlewares.copy.js"></script>
+<script src="sigma/src/misc/sigma.misc.animation.js"></script>
+<script src="sigma/src/misc/sigma.misc.bindEvents.js"></script>
+<script src="sigma/src/misc/sigma.misc.bindDOMEvents.js"></script>
+<script src="sigma/src/misc/sigma.misc.drawHovers.js"></script>
+<!-- END SIGMA IMPORTS -->
+
+<head>
+    <meta charset="utf-8">
+
+    <title>An Introduction to TensorFlow</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+
+        <section>
+            <h2>An Introduction to TensorFlow</h2>
+            <h3 class="active-color">Siavash Kavousi</h3>
+        </section>
+
+        <section>
+            <h2>Machine Learning</h2>
+            <h2>TensorFlow</h2>
+            <h2>References</h2>
+            <h2>Thanks</h2>
+        </section>
+
+        <section>
+            <h2 class="active-color">Machine Learning</h2>
+            <h2>TensorFlow</h2>
+            <h2>References</h2>
+            <h2>Thanks</h2>
+        </section>
+
+        <section>
+            <section>
+                <h2 class="active-color">Machine Learning</h2>
+                <h3>What is Machine Learning?</h3>
+                <h3>Forward Propagation</h3>
+                <h3>Backward Propagation</h3>
+                <h3>Prediction</h3>
+                <h3>Loss</h3>
+            </section>
+
+            <section>
+                <h2>What is Machine Learning?</h2>
+                <p>Machine learning is a type of artificial intelligence (AI) that provides computers
+                    with the ability to learn without being explicitly programmed</p>
+            </section>
+
+            <section>
+                <h2>CIFAR-10 Dataset</h2>
+                <div id="cifar-img">
+                    <img src="cifar-10-img">
+                </div>
+                <div id="cifar-nums">
+                    <p>Training Images: 50000</p>
+                    <p>Test Images: 10000</p>
+                    <p>Labels: 10</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>K-NN (K nearest neighbors)</h2>
+                <p>How do we compare images?</p>
+                <p>L1 distance: </p>
+                \[\begin{aligned}
+                d_1(I_1, I_2) = \sum(I_1 - I_2)
+                \end{aligned} \]
+
+                <div class="left-stacking">
+                    <table style="width:25%">
+                        <tr>
+                            <td>56</td>
+                            <td>39</td>
+                            <td>10</td>
+                            <td>18</td>
+                        </tr>
+                        <tr>
+                            <td>90</td>
+                            <td>23</td>
+                            <td>128</td>
+                            <td>133</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>26</td>
+                            <td>178</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>255</td>
+                            <td>220</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="left-stacking">
+                    <p> &nbsp; </p>
+                    <h2> &minus; </h2>
+                </div>
+
+                <div class="left-stacking">
+                    <table style="width:25%">
+                        <tr>
+                            <td>10</td>
+                            <td>20</td>
+                            <td>24</td>
+                            <td>17</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>10</td>
+                            <td>89</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>16</td>
+                            <td>178</td>
+                            <td>170</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>32</td>
+                            <td>233</td>
+                            <td>112</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="left-stacking">
+                    <p> &nbsp; </p>
+                    <h2> &equals; </h2>
+                </div>
+
+                <div class="left-stacking">
+                    <table style="width:25%">
+                        <tr>
+                            <td>46</td>
+                            <td>12</td>
+                            <td>14</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>82</td>
+                            <td>13</td>
+                            <td>39</td>
+                            <td>33</td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>10</td>
+                            <td>0</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>32</td>
+                            <td>22</td>
+                            <td>108</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section>
+                <h2>Prediction</h2>
+                <img src="prediction.png" style="border: none"/>
+            </section>
+
+            <section data-background="rgb(105,105,105)">
+                <h2>Loss</h2>
+                <img src="loss.png" style="border: none"/>
+            </section>
+
+            <section style="height: 700px" data-background="#4d7e65">
+                <h2>Forward and Backward Propagation</h2>
+                <div id="container" style="position:absolute; width: 500px;height: 500px;">
+                    <script src="forward-pass-graph.js"></script>
+                    <div id="graph-container"></div>
+                </div>
+            </section>
+
+            <section data-background="#4d7e65">
+                <h2>Forward and Backward Propagation - cont'd</h2>
+
+                \[\begin{aligned}
+                f(x) = ax &rarr; df(x)/dx = a \\
+                f(x) = 1 + x &rarr; df(x)/dx = 1 \\
+                f(x) = exp(x) &rarr; df(x)/dx = exp(x)
+                \end{aligned} \]
+            </section>
+
+            <section>
+                <h2>Neural Net :)</h2>
+                <img src='neural_net'/>
+            </section>
+
+            <section>
+                <h2>GoogLeNet</h2>
+                <img src='googlenet.png'/>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2 class="active-color">TensorFlow</h2>
+                <h3>Features</h3>
+                <h3>Graph</h3>
+                <h3>Node</h3>
+                <h3>Edge</h3>
+                <h3>Computational Environment</h3>
+                <h3>Feeds</h3>
+                <h3>TensorBoard</h3>
+            </section>
+
+            <section>
+                <h2>Features</h2>
+                <h3>Language Options</h3>
+                <p>Python, C++</p>
+                <h3>Auto-Differentiation</h3>
+                <h3>Maximize Performance</h3>
+                <h3>True Portability</h3>
+            </section>
+
+            <section>
+                <h2>Graph</h2>
+                <p>Computations are represented as Graphs</p>
+                <p>Separates <b>construction</b> and <b>execution</b> phase, Any advantage?!!</p>
+                <h3>Better performance than numpy :)</h3>
+                <p>Less overhead because of less switching</p>
+            </section>
+
+            <section data-background="#4d7e65">
+                <h2>Node</h2>
+                <h3>Simply... operations</h3>
+
+                <pre><code>
+                import tensorflow as tf
+                matrix1 = tf.constant([[3., 3.]])
+                matrix2 = tf.constant([[2.],[2.]])
+                product = tf.matmul(matrix1, matrix2)
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Edge</h2>
+                <h3>Calls'em <b>Tensors</b> here</h3>
+                <h3>Tensors are data</h3>
+                <h3>Passes tensors between nodes</h3>
+            </section>
+
+            <section>
+                <h2>Computational Environment</h2>
+                <h3>After construction phase is <b>Execution phase</b>!</h3>
+                <h3>Executes graphs in the context of <b>Sessions</b></h3>
+
+                <pre><code>
+                    sess = tf.Session()
+                    result = sess.run(product)
+                    print(result)
+                    # Close the Session when we're done.
+                    sess.close()
+                </code></pre>
+                <p>or</p>
+                <pre><code>
+                    with tf.Session() as sess:
+                        result = sess.run([product])
+                        print(result)
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Feeds</h2>
+                <h3>Tensors are stored in Constants, Variables and Placeholders</h3>
+                <h3>Variables maintains state across execution of the graph</h3>
+                <h3>Placeholders are used to feed input tensors</h3>
+            </section>
+
+            <section>
+                <h2>TensorBoard</h2>
+                <h3>Useful tool!</h3>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Machine Learning</h2>
+                <h2>TensorFlow</h2>
+                <h2 class="active-color">References</h2>
+                <h2>Thanks</h2>
+            </section>
+
+            <section>
+                <h2>References</h2>
+                <h3>https://www.tensorflow.org</h3>
+                <h3>http://playground.tensorflow.org/</h3>
+            </section>
+        </section>
+
+        <section>
+            <h1>Thanks :)</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+
+    Reveal.initialize({
+        history: true,
+        transition: 'linear',
+
+        math: {
+            // mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+            config: 'TeX-AMS_HTML-full'
+        },
+
+        dependencies: [
+            {src: 'lib/js/classList.js'},
+            {src: 'plugin/math/math.js', async: true},
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'plugin/zoom-js/zoom.js', async: true},
+            {src: 'plugin/notes/notes.js', async: true},
+        ]
+    });
+
+</script>
+
+</body>
+</html>

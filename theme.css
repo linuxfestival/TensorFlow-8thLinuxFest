@@ -1,0 +1,28 @@
+#cifar-img {
+    float: left;
+}
+
+#cifar-nums {
+    float: left;
+    text-align: left;
+}
+
+.active-color {
+    color: #ffc520 !important;
+}
+
+table, th, td {
+    border: 1px solid white !important;
+}
+
+.left-stacking {
+    float: left;
+}
+
+#graph-container {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+}
